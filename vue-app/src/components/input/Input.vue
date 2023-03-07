@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "Input"
-}
+  name: 'CustomInput',
+};
 </script>
 
 <style scoped>
@@ -14,6 +14,6 @@ export default {
     border: none;
     box-shadow: 0 0 10px #00000061;
     border-radius: 5px;
-    opacity: .1;
+    margin-right: 10px;
   }
 </style>
