@@ -1,6 +1,6 @@
 <template>
   <div class="release-duration">
-    {{ duration }} and {{ year }}
+    {{$filters.durationAndRelease(duration, release)}}
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'CustomReleaseAndDuration',
   props: {
-    year: String,
+    release: String,
     duration: String,
   },
 };

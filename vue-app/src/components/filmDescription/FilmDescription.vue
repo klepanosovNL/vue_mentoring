@@ -2,7 +2,7 @@
   <div class="film">
     <div class="home" @click="$emit('closeFilmDescription')"
          @keydown="$emit('closeFilmDescription')">back</div>
-    <img :src="film.img" :alt="film.name">
+    <img v-lazy="film.img" :alt="film.name">
     <div class="film__details">
       <h2 class="film__title">{{ film.name }}</h2>
       <CustomRating :rating='film.rating'/>
