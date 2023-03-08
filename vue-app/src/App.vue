@@ -12,7 +12,7 @@
           films" :key="film.id"/>
       </div>
     </div>
-    <CustomFooter/>
+    <global-footer />
   </div>
 </template>
 
@@ -22,7 +22,6 @@ import CustomCard from '@/components/card/Card.vue';
 import CustomFilmDescription from '@/components/filmDescription/FilmDescription.vue';
 import CustomHeader from '@/components/header/Header.vue';
 import CustomSort from '@/components/sort/Sort.vue';
-import CustomFooter from '@/components/footer/Footer.vue';
 
 export default defineComponent({
   name: 'App',
@@ -30,7 +29,6 @@ export default defineComponent({
     CustomFilmDescription,
     CustomHeader,
     CustomSort,
-    CustomFooter,
     CustomCard,
   },
   data() {
