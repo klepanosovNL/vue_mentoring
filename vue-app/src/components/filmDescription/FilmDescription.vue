@@ -1,14 +1,13 @@
 <template>
   <div class="film">
-    <div class="home" @click="$emit('closeFilmDescription')"
-         @keydown="$emit('closeFilmDescription')">back</div>
-    <img v-lazy="film.img" :alt="film.name">
+    <div class="home" @click="closeMovieDescription" @keydown="closeMovieDescription">back</div>
+    <img v-lazy="movie.poster_path" :alt="movie.title">
     <div class="film__details">
-      <h2 class="film__title">{{ film.name }}</h2>
-      <CustomRating :rating='film.rating'/>
-      <CustomReleaseAndDuration :duration="film.duration" :release="film.year" />
+      <h2 class="film__title">{{ movie.title }}</h2>
+      <CustomRating :rating='movie.vote_count'/>
+      <CustomReleaseAndDuration duration="140" :release="movie.release_date" />
       <div class="film__description">
-        {{ film.description }}
+        {{ movie.overview }}
       </div>
     </div>
   </div>
@@ -17,6 +16,7 @@
 <script>
 import CustomRating from '@/components/rating/Rating.vue';
 import CustomReleaseAndDuration from '@/components/releaseAndDuration/ReleaseAndDuration.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CustomFilmDescription',
@@ -24,14 +24,14 @@ export default {
     CustomReleaseAndDuration,
     CustomRating,
   },
-  props: {
-    film: {
-      name: String,
-      year: String,
-      img: String,
-      description: String,
-      rating: String,
-      duration: String,
+  computed: {
+    ...mapGetters({
+      movie: 'getMovieById',
+    }),
+  },
+  methods: {
+    closeMovieDescription() {
+      this.$store.commit('CLOSE_MOVIE_DESCRIPTION');
     },
   },
 };

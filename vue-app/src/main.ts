@@ -10,10 +10,9 @@ app.use(plugin);
 app.use(VueLazyLoad, {});
 
 app.config.globalProperties.$filters = {
-  durationAndRelease(duration = 'Some ', year = 'Some ') {
-    return `${year}year ${duration}min`;
+  durationAndRelease(duration = 'Some ', date = 0) {
+    return `${new Date(date).getFullYear()}year ${duration}min`;
   },
 };
-
 app.use(store);
 app.mount('#app');
