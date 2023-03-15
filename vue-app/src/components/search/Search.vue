@@ -1,24 +1,32 @@
 <template>
   <div class="header__search">
-    <CustomInput />
+    <input class="input--default" v-model="model" placeholder="Search"/>
     <CustomButton :buttonName="buttonName"/>
   </div>
 </template>
 
 <script>
 import CustomButton from '@/components/button/Button.vue';
-import CustomInput from '@/components/input/Input.vue';
 
 export default {
   name: 'CustomSearch',
   components: {
     CustomButton,
-    CustomInput,
   },
   data() {
     return {
       buttonName: 'Search',
     };
+  },
+  computed: {
+    model: {
+      set(value) {
+        this.$store.commit('SET_SEARCH_VALUE', value);
+      },
+      get() {
+        return this.$store.state.inputSearchValue;
+      },
+    },
   },
 };
 </script>
@@ -31,5 +39,13 @@ export default {
   .header__search input {
     flex-grow: 1;
     font-size: 20px;
+  }
+
+  .input--default {
+    min-height: 24px;
+    border: none;
+    box-shadow: 0 0 10px #00000061;
+    border-radius: 5px;
+    margin-right: 10px;
   }
 </style>

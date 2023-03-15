@@ -1,12 +1,15 @@
 <template>
   <div class="filter">
     <span>{{ options.label }}</span>
-    <button @click="setFilter(item.id)" v-for="item of options.filters" :key="item.id"
-            :id="item.id"
-            :class="{
+    <button v-for="item of options.filters"
+        :key="item.id"
+        :class="{
           'filter__item': true,
-          'filter__item--selected': options.currentHeaderFilter === item.id
-        }">{{ item.text }}
+          'filter__item--selected': activeChoice === item.id
+        }"
+        @click="clickHandler(item.id)"
+    >
+      {{ item.text }}
     </button>
   </div>
 </template>
@@ -18,14 +21,9 @@ export default {
     options: {
       label: String,
       filters: Array,
-      currentHeaderFilter: String,
     },
-  },
-  emits: ['setFilter'],
-  methods: {
-    setFilter(selectedFilter) {
-      this.$emit('setFilter', selectedFilter);
-    },
+    activeChoice: String,
+    clickHandler: Function,
   },
 };
 </script>

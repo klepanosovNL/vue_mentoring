@@ -1,29 +1,38 @@
 <template>
   <div class="sort">
     <div class="sort__count">
-      9 movie found
+      {{ movieCount }} movie found
     </div>
-    <Filter :options="options" @setFilter="setFilterOption" />
+    <CustomFilter :options="options" :activeChoice="sortBy" :clickHandler="clickHandler"/>
+
   </div>
 </template>
 
 <script>
-import Filter from '@/components/filter/Filter.vue';
+import CustomFilter from '@/components/filter/Filter.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CustomSort',
   components: {
-    Filter,
+    CustomFilter,
+  },
+  computed: {
+    ...mapGetters({
+      movieCount: 'getMoviesCount',
+    }),
+    sortBy() {
+      return this.$store.state.sortBy;
+    },
   },
   data() {
     return {
       options: {
         label: 'sort by',
-        currentHeaderFilter: 'release',
         filters: [
           {
-            text: 'release data',
-            id: 'release',
+            text: 'release date',
+            id: 'release_date',
           },
           {
             text: 'rating',
@@ -34,8 +43,8 @@ export default {
     };
   },
   methods: {
-    setFilterOption(currentOption) {
-      this.options.currentHeaderFilter = currentOption;
+    clickHandler(sortBy) {
+      this.$store.commit('SET_SORT_BY', sortBy);
     },
   },
 };
