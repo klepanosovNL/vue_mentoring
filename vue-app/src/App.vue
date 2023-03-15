@@ -1,27 +1,27 @@
 <template>
   <div class="wrapper">
     <CustomHeader v-if="!isVisibleMovieDescription" />
-    <CustomFilmDescription v-else/>
-    <CustomSort v-if="!isVisibleMovieDescription"/>
+    <CustomFilmDescription v-else />
+    <CustomSort v-if="!isVisibleMovieDescription" />
     <div class="main">
       <div class="cards">
-        <CustomCard :movie="movie" v-for="movie in movies" :key="movie.id"/>
+        <CustomCard :movie="movie" v-for="movie in movies" :key="movie.id" />
       </div>
     </div>
-    <global-footer/>
+    <global-footer />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
-import CustomCard from '@/components/card/Card.vue';
-import CustomFilmDescription from '@/components/filmDescription/FilmDescription.vue';
-import CustomHeader from '@/components/header/Header.vue';
-import CustomSort from '@/components/sort/Sort.vue';
-import { mapState, useStore } from 'vuex';
+import { computed, defineComponent } from "vue";
+import CustomCard from "@/components/card/Card.vue";
+import CustomFilmDescription from "@/components/filmDescription/FilmDescription.vue";
+import CustomHeader from "@/components/header/Header.vue";
+import CustomSort from "@/components/sort/Sort.vue";
+import { mapState, useStore } from "vuex";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     CustomFilmDescription,
     CustomHeader,
@@ -37,7 +37,7 @@ export default defineComponent({
   },
   computed: {
     ...mapState({
-      isVisibleMovieDescription: 'movieById',
+      isVisibleMovieDescription: "movieById",
     }),
   },
 });

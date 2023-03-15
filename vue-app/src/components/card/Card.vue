@@ -1,7 +1,11 @@
 <template>
   <div class="card">
-    <img v-lazy="movie.poster_path" :alt="movie.title" @click="setMovieById(movie.id)"
-         @keydown="setMovieById(movie.id)" />
+    <img
+      v-lazy="movie.poster_path"
+      :alt="movie.title"
+      @click="setMovieById(movie.id)"
+      @keydown="setMovieById(movie.id)"
+    />
     <div class="card__title">
       {{ movie.title }}
     </div>
@@ -11,9 +15,8 @@
 </template>
 
 <script>
-
 export default {
-  name: 'CustomCard',
+  name: "CustomCard",
   props: {
     movie: {
       id: Number,
@@ -31,7 +34,7 @@ export default {
   },
   methods: {
     setMovieById(id) {
-      this.$store.commit('OPEN_MOVIE_DESCRIPTION', id);
+      this.$store.commit("OPEN_MOVIE_DESCRIPTION", id);
     },
   },
 };
@@ -48,5 +51,4 @@ export default {
   break-inside: avoid;
   cursor: pointer;
 }
-
 </style>

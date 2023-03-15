@@ -2,20 +2,18 @@
   <div class="header">
     <div class="header__container">
       <h1>FIND YOUR MOVIE</h1>
-      <CustomSearch/>
-      <CustomFilter :options="options" :activeChoice="searchBy"
-                    :clickHandler="clickHandler"/>
+      <CustomSearch />
+      <CustomFilter :options="options" :activeChoice="searchBy" :clickHandler="clickHandler" />
     </div>
   </div>
 </template>
 
 <script>
-
-import CustomFilter from '@/components/filter/Filter.vue';
-import CustomSearch from '@/components/search/Search.vue';
+import CustomFilter from "@/components/filter/Filter.vue";
+import CustomSearch from "@/components/search/Search.vue";
 
 export default {
-  name: 'CustomHeader',
+  name: "CustomHeader",
   components: {
     CustomSearch,
     CustomFilter,
@@ -23,15 +21,15 @@ export default {
   data() {
     return {
       options: {
-        label: 'search by',
+        label: "search by",
         filters: [
           {
-            text: 'title',
-            id: 'title',
+            text: "title",
+            id: "title",
           },
           {
-            text: 'genre',
-            id: 'genres',
+            text: "genre",
+            id: "genres",
           },
         ],
       },
@@ -44,7 +42,7 @@ export default {
   },
   methods: {
     clickHandler(searchBy) {
-      this.$store.commit('SET_SEARCH_BY', searchBy);
+      this.$store.commit("SET_SEARCH_BY", searchBy);
     },
   },
 };

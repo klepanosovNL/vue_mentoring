@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { createStore } from 'vuex';
-import movies from '../assets/movies.json';
+import _ from "lodash";
+import { createStore } from "vuex";
+import movies from "../assets/movies.json";
 
 interface Movie {
   id: number;
@@ -15,24 +15,31 @@ interface Movie {
   revenue: number;
   genres: string[];
   runtime: null;
-  [key: string]: any,
+  [key: string]: any;
 }
 
 export default createStore({
   state: {
     movies: movies as Movie[],
     movieById: null,
-    searchBy: 'title',
-    sortBy: 'release_date',
-    inputSearchValue: '',
+    searchBy: "title",
+    sortBy: "release_date",
+    inputSearchValue: "",
   },
   getters: {
-    getMovies: (state) => (state.inputSearchValue !== ''
-      ? _.filter(_.sortBy(state.movies, state.sortBy), ((movie) => Array.isArray(movie[state.searchBy])
-          ? String(movie[state.searchBy].map((genre:string) => genre.toLowerCase())).includes(state.inputSearchValue.toLocaleLowerCase())
-          : _.startsWith(movie[state.searchBy].toLowerCase(), state.inputSearchValue.trim().toLowerCase())
-      ))
-      : _.sortBy(state.movies, state.sortBy)),
+    getMovies: (state) =>
+      state.inputSearchValue !== ""
+        ? _.filter(_.sortBy(state.movies, state.sortBy), (movie) =>
+            Array.isArray(movie[state.searchBy])
+              ? String(movie[state.searchBy].map((genre: string) => genre.toLowerCase())).includes(
+                  state.inputSearchValue.toLocaleLowerCase()
+                )
+              : _.startsWith(
+                  movie[state.searchBy].toLowerCase(),
+                  state.inputSearchValue.trim().toLowerCase()
+                )
+          )
+        : _.sortBy(state.movies, state.sortBy),
     getMoviesCount: (state) => state.movies.length,
     getMovieById: (state) => state.movies.find((movie) => movie.id === state.movieById),
   },
@@ -56,4 +63,3 @@ export default createStore({
   actions: {},
   modules: {},
 });
-

@@ -1,25 +1,22 @@
 <template>
   <div class="sort">
-    <div class="sort__count">
-      {{ movieCount }} movie found
-    </div>
-    <CustomFilter :options="options" :activeChoice="sortBy" :clickHandler="clickHandler"/>
-
+    <div class="sort__count">{{ movieCount }} movie found</div>
+    <CustomFilter :options="options" :activeChoice="sortBy" :clickHandler="clickHandler" />
   </div>
 </template>
 
 <script>
-import CustomFilter from '@/components/filter/Filter.vue';
-import { mapGetters } from 'vuex';
+import CustomFilter from "@/components/filter/Filter.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'CustomSort',
+  name: "CustomSort",
   components: {
     CustomFilter,
   },
   computed: {
     ...mapGetters({
-      movieCount: 'getMoviesCount',
+      movieCount: "getMoviesCount",
     }),
     sortBy() {
       return this.$store.state.sortBy;
@@ -28,15 +25,15 @@ export default {
   data() {
     return {
       options: {
-        label: 'sort by',
+        label: "sort by",
         filters: [
           {
-            text: 'release date',
-            id: 'release_date',
+            text: "release date",
+            id: "release_date",
           },
           {
-            text: 'rating',
-            id: 'rating',
+            text: "rating",
+            id: "rating",
           },
         ],
       },
@@ -44,24 +41,24 @@ export default {
   },
   methods: {
     clickHandler(sortBy) {
-      this.$store.commit('SET_SORT_BY', sortBy);
+      this.$store.commit("SET_SORT_BY", sortBy);
     },
   },
 };
 </script>
 
 <style scoped>
-  .sort {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    margin: 20px 0;
-    background-color: darkslategrey;
-  }
+.sort {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: darkslategrey;
+}
 
-  .sort__count {
-    color: white;
-    font-weight: 500;
-    margin-right: 15px;
-  }
+.sort__count {
+  color: white;
+  font-weight: 500;
+  margin-right: 15px;
+}
 </style>
