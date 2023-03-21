@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click="$emit('selectFilm', film)" @keydown="selectFilm($event)">
-    <img :src="film.img" :alt="film.name"/>
+    <img v-lazy=film.img :alt="film.name"/>
     <div class="card__title">
       {{ film.name }}
     </div>
