@@ -1,58 +1,64 @@
 <template>
   <div class="sort">
-    <div class="sort__count">
-      9 movie found
-    </div>
-    <Filter :options="options" @setFilter="setFilterOption" />
+    <div class="sort__count">{{ movieCount }} movie found</div>
+    <CustomFilter :options="options" :activeChoice="sortBy" :clickHandler="clickHandler" />
   </div>
 </template>
 
 <script>
-import Filter from '@/components/filter/Filter.vue';
+import CustomFilter from "@/components/filter/Filter.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'CustomSort',
+  name: "CustomSort",
   components: {
-    Filter,
+    CustomFilter,
+  },
+  computed: {
+    ...mapGetters({
+      movieCount: "getMoviesCount",
+    }),
+    sortBy() {
+      return this.$store.state.sortBy;
+    },
   },
   data() {
     return {
       options: {
-        label: 'sort by',
-        currentHeaderFilter: 'release',
+        label: "sort by",
         filters: [
           {
-            text: 'release data',
-            id: 'release',
+            text: "release date",
+            id: "release_date",
           },
           {
-            text: 'rating',
-            id: 'rating',
+            text: "rating",
+            id: "rating",
           },
         ],
       },
     };
   },
   methods: {
-    setFilterOption(currentOption) {
-      this.options.currentHeaderFilter = currentOption;
+    clickHandler(sortBy) {
+      this.$store.commit("SET_SORT_BY", sortBy);
     },
   },
 };
 </script>
 
 <style scoped>
-  .sort {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    margin: 20px 0;
-    background-color: darkslategrey;
-  }
+.sort {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: darkslategrey;
+}
 
-  .sort__count {
-    color: white;
-    font-weight: 500;
-    margin-right: 15px;
-  }
+.sort__count {
+  color: white;
+  font-weight: 500;
+  margin-right: 15px;
+}
 </style>

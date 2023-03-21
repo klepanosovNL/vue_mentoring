@@ -1,31 +1,30 @@
 <template>
   <div class="filter">
     <span>{{ options.label }}</span>
-    <button @click="setFilter(item.id)" v-for="item of options.filters" :key="item.id"
-            :id="item.id"
-            :class="{
-          'filter__item': true,
-          'filter__item--selected': options.currentHeaderFilter === item.id
-        }">{{ item.text }}
+    <button
+      v-for="item of options.filters"
+      :key="item.id"
+      :class="{
+        filter__item: true,
+        'filter__item--selected': activeChoice === item.id,
+      }"
+      @click="clickHandler(item.id)"
+    >
+      {{ item.text }}
     </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CustomFilter',
+  name: "CustomFilter",
   props: {
     options: {
       label: String,
       filters: Array,
-      currentHeaderFilter: String,
     },
-  },
-  emits: ['setFilter'],
-  methods: {
-    setFilter(selectedFilter) {
-      this.$emit('setFilter', selectedFilter);
-    },
+    activeChoice: String,
+    clickHandler: Function,
   },
 };
 </script>
@@ -47,7 +46,7 @@ export default {
   text-transform: uppercase;
   padding: 5px 10px;
   cursor: pointer;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .filter__item:hover {
